@@ -1,4 +1,8 @@
 const https = require("https");
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 const express = require('express'); const app = express();
 const tokens = [
   { symbol: "abbcusdt", contract: "0xe83cE6bfb580583bd6A62B4Be7b34fC25F02910D-bsc" },
