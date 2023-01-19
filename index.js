@@ -42,7 +42,7 @@ const tokens = [
   { symbol: "lblusdt", contract: "0x77edFaE59a7948d66E9911A30cC787d2172343d4-bsc" }
 ];
 
-setInterval(() => {
+app.get('/', (req, res) => {
   tokens.forEach((token) => {
     try {
       // Get the ask and bid prices for the token from Huobi
@@ -77,29 +77,30 @@ setInterval(() => {
 
                   // Check if the BSC price is less than 98% of the Huobi bid price
                   if (al < 0.99) {
-                    console.log(`${token.symbol}: ${al}`);
+                    res.send(`${token.symbol} - BSC price to Huobi bid price ratio: ${al}`);
                   }
 
                   // Check if the Huobi ask price is more than 102% of the BSC price
                   if (sat > 1.01) {
-                    console.log(`${token.symbol}: ${sat}`);
+                    res.send(`${token.symbol} - Huobi ask price to BSC price ratio: ${sat}`);
                   }
                 });
               })
               .on("error", (err) => {
                 console.log("Error: " + err.message);
+              });
           });
-      });
-    })
-    .on("error", (err) => {
+        })
+        .on("error", (err) => {
+          console.log("Error: " + err.message);
+        });
+    } catch (err) {
       console.log("Error: " + err.message);
-    });
-    } catch (err) {  console.log("Error: " + err.message);
-  }
-})
-}, 30000);
+    }
+  });
+});
 app.get('/', (req, res) => {
-  res.send('AL': ${al} - 'SAT': ${sat});
+  res.send( ${al} -  ${sat});
   });
 
 const port = process.env.PORT || 3000;
