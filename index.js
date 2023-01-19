@@ -98,6 +98,9 @@ setInterval(() => {
   }
 })
 }, 30000);
+app.get('/', (req, res) => {
+  res.send(AL: ${al} - SAT: ${sat});
+  });
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
