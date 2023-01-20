@@ -129,8 +129,8 @@ app.get("/", (req, res) => {
         <tr>
           <td>${token.symbol}</td>
           <td>${token.contract}</td>
-          <td>${al}</td>
-          <td>${sat}</td>
+          <td>${token.al}</td>
+          <td>${token.sat}</td>
         </tr>
       `).join('')}
     </table>
