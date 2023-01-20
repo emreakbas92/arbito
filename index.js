@@ -105,7 +105,7 @@ setInterval(() => {
 }});
 
 }, 30000);
-app.get("/", (req, res) => {
+app.get("/all", (req, res) => {
   let tokenList = []
   tokens.forEach((token) => {
     if (al < 0.99) {
