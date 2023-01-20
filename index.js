@@ -115,6 +115,18 @@ setInterval(() => {
 })
 }, 30000);
 app.get("/", (req, res) => {
+  let tokenList = []
+  tokens.forEach((token) => {
+    if (al < 0.99) {
+      tokenList.push({ symbol: token.symbol, value: al });
+    } else if (sat > 1.01) {
+      tokenList.push({ symbol: token.symbol, value: sat });
+    }
+  });
+  res.send(tokenList);
+});
+
+app.get("/", (req, res) => {
   res.send(`
     <h1>Token List</h1>
     <table>
@@ -143,14 +155,3 @@ app.listen(3000, () => {
   console.log('Server is running on port 3000');
   });
   
-  app.get("/", (req, res) => {
-    let tokenList = []
-    tokens.forEach((token) => {
-      if (al < 0.99) {
-        tokenList.push({ symbol: token.symbol, value: al });
-      } else if (sat > 1.01) {
-        tokenList.push({ symbol: token.symbol, value: sat });
-      }
-    });
-    res.send(tokenList);
-  });
