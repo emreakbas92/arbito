@@ -39,7 +39,22 @@ const tokens = [
   { symbol: "inrusdt", contract: "0xaB725d0A10C3f24725c89F5765Ae5794a26C1336-bsc" },
   { symbol: "ntusdt", contract: "0xfbcf80ed90856AF0d6d9655F746331763EfDb22c-bsc" },
   { symbol: "xcurusdt", contract: "0xd52669712f253CD6b2Fe8A8638F66ed726cb770C-bsc" },
-  { symbol: "lblusdt", contract: "0x77edFaE59a7948d66E9911A30cC787d2172343d4-bsc" }
+  { symbol: "bbcusdt", contract: "0x37e5da11b6A4DC6d2f7Abe232cDd30B0B8Fc63B1-bsc" },
+  { symbol: "lblusdt", contract: "0x77edFaE59a7948d66E9911A30cC787d2172343d4-bsc" },
+  { symbol: "bullusdt", contract: "0x9f95e17b2668AFE01F8fbD157068b0a4405Cc08D-polygon" },
+  { symbol: "voxelusdt", contract: "0xd0258a3fD00f38aa8090dfee343f10A9D4d30D3F-polygon" },
+  { symbol: "gcoinusdt", contract: "0x071AC29d569a47EbfFB9e57517F855Cb577DCc4C-polygon" },
+  { symbol: "zedusdt", contract: "0x5eC03C1f7fA7FF05EC476d19e34A22eDDb48ACdc-polygon" },
+  { symbol: "dfxusdt", contract: "0xE7804D91dfCDE7F776c90043E03eAa6Df87E6395-polygon" },
+  { symbol: "routeusdt", contract: "0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4-polygon" },
+  { symbol: "ncashusdt", contract: "0xc69Eba65e87889f0805dB717Af06797055A0BA07-avalanche" },
+  { symbol: "xetausdt", contract: "0x31c994AC062C1970C086260Bc61babB708643fAc-avalanche" },
+  { symbol: "fitfiusdt", contract: "0x714f020C54cc9D104B6F4f6998C63ce2a31D1888-avalanche" },
+  { symbol: "hecusdt", contract: "0xC7f4debC8072e23fe9259A5C0398326d8EfB7f5c-avalanche" },
+  { symbol: "dypusdt", contract: "0x961C8c0B1aaD0c0b10a51FeF6a867E3091BCef17-avalanche" },
+  { symbol: "wxtusdt", contract: "0xfcDe4A87b8b6FA58326BB462882f1778158B02F1-avalanche" },
+  { symbol: "gmxusdt", contract: "0x62edc0692BD897D2295872a9FFCac5425011c661-avalanche" },
+  { symbol: "rocousdt", contract: "0xb2a85C5ECea99187A977aC34303b80AcbDdFa208-avalanche" }
 ];
 
 let al, sat;
@@ -128,7 +143,14 @@ app.listen(3000, () => {
   console.log('Server is running on port 3000');
   });
   
-  app.get('/', (req, res) => {
-  res.send('AL: ${al} - SAT: ${sat}');
+  app.get("/", (req, res) => {
+    let tokenList = []
+    tokens.forEach((token) => {
+      if (al < 0.99) {
+        tokenList.push({ symbol: token.symbol, value: al });
+      } else if (sat > 1.01) {
+        tokenList.push({ symbol: token.symbol, value: sat });
+      }
+    });
+    res.send(tokenList);
   });
-
