@@ -76,30 +76,20 @@ setInterval(() => {
 
             // Get the price of the token on the BSC network from Dex.guru
             https
-              .get(`https://api.dex.guru/v1/tokens/${token.contract}`, (res) => {
-                let data = "";
-                res.on("data", (chunk) => {
-                  data += chunk;
-                });
-                res.on("end", () => {
-                  const json = JSON.parse(data);
-                  const price = json.priceUSD;
+          .get(`https://api.dex.guru/v1/tokens/${token.contract}`, (res) => {
+            let data = "";
+            res.on("data", (chunk) => {
+              data += chunk;
+            });
+            res.on("end", () => {
+              const json = JSON.parse(data);
+              const price = json.priceUSD;
 
-                  // Calculate the ratio of the BSC price to the Huobi bid price
-                  al = price / bid;
+              // Calculate the ratio of the BSC price to the Huobi bid price
+              al = price / bid;
 
-                  // Calculate the ratio of the Huobi ask price to the BSC price
-                  sat = price / ask;
-
-                  // Check if the BSC price is less than 98% of the Huobi bid price
-                  if (al < 0.99) {
-                    console.log(`${token.symbol}: ${al}`);
-                  }
-
-                  // Check if the Huobi ask price is more than 102% of the BSC price
-                if (sat > 1.01) {
-                console.log(`${token.symbol}: ${sat}`);
-              }
+              // Calculate the ratio of the Huobi ask price to the BSC price
+              sat = price / ask;
             });
           })
           .on("error", (err) => {
@@ -110,9 +100,10 @@ setInterval(() => {
     .on("error", (err) => {
       console.log("Error: " + err.message);
     });
-    } catch (err) {  console.log("Error: " + err.message);
-  }
-})
+} catch (err) {
+  console.log("Error: " + err.message);
+});
+
 }, 30000);
 app.get("/", (req, res) => {
   let tokenList = []
@@ -153,5 +144,4 @@ app.listen(port, () => {
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
-  });
-  
+  }); 
