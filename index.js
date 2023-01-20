@@ -105,27 +105,23 @@ setInterval(() => {
 }});
 
 }, 30000);
-app.get("/all", (req, res) => {
+app.get("/", (req, res) => {
   let tokenList = []
   tokens.forEach((token) => {
-    if (token.al < 0.99) {
-      tokenList.push({ symbol: token.symbol, value: al });
-    } else if (token.sat > 1.01) {
-      tokenList.push({ symbol: token.symbol, value: sat });
+    if (token.al < 0.98 || token.sat > 1.02) {
+      tokenList.push({ symbol: token.symbol, contract: token.contract, al: token.al, sat: token.sat });
     }
   });
-  res.send(tokenList);
-});
-
-app.get("/", (req, res) => {
-  res.send(`
-    <h1>Token List</h1>
+  res.send(
+    `<h1>Token List</h1>
     <table>
       <tr>
         <th>Symbol</th>
         <th>Contract Address</th>
+        <th>BSC/Huobi Bid Ratio</th>
+        <th>Huobi/BSC Ask Ratio</th>
       </tr>
-      ${tokens.map(token => `
+      ${tokenList.map(token => `
         <tr>
           <td>${token.symbol}</td>
           <td>${token.contract}</td>
@@ -133,8 +129,8 @@ app.get("/", (req, res) => {
           <td>${token.sat}</td>
         </tr>
       `).join('')}
-    </table>
-  `);
+    </table>`
+  );
 });
 
 const port = process.env.PORT || 3000;
