@@ -102,7 +102,7 @@ setInterval(() => {
     });
 } catch (err) {
   console.log("Error: " + err.message);
-});
+}});
 
 }, 30000);
 app.get("/", (req, res) => {
@@ -117,15 +117,13 @@ app.get("/", (req, res) => {
   res.send(tokenList);
 });
 
-app.get("/all", (req, res) => {
+app.get("/", (req, res) => {
   res.send(`
     <h1>Token List</h1>
     <table>
       <tr>
         <th>Symbol</th>
         <th>Contract Address</th>
-        <th>BSC/Huobi Bid Ratio</th>
-        <th>Huobi/BSC Ask Ratio</th>
       </tr>
       ${tokens.map(token => `
         <tr>
