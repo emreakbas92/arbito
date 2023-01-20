@@ -106,14 +106,8 @@ setInterval(() => {
 
 }, 30000);
 app.get("/", (req, res) => {
-  let tokenList = []
-  tokens.forEach((token) => {
-    if (token.al < 0.98 || token.sat > 1.02) {
-      tokenList.push({ symbol: token.symbol, contract: token.contract, al: token.al, sat: token.sat });
-    }
-  });
-  res.send(
-    `<h1>Token List</h1>
+  res.send(`
+    <h1>Token List</h1>
     <table>
       <tr>
         <th>Symbol</th>
@@ -121,17 +115,23 @@ app.get("/", (req, res) => {
         <th>BSC/Huobi Bid Ratio</th>
         <th>Huobi/BSC Ask Ratio</th>
       </tr>
-      ${tokenList.map(token => `
-        <tr>
-          <td>${token.symbol}</td>
-          <td>${token.contract}</td>
-          <td>${token.al}</td>
-          <td>${token.sat}</td>
-        </tr>
-      `).join('')}
-    </table>`
-  );
+      ${tokens.map(token => {
+        if (token.al < 0.99 || token.sat > 1.01) {
+          return `
+            <tr>
+              <td>${token.symbol}</td>
+              <td>${token.contract}</td>
+              <td>${token.al}</td>
+              <td>${token.sat}</td>
+            </tr>
+          `;
+        }
+        return '';
+      }).join('')}
+    </table>
+  `);
 });
+
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
