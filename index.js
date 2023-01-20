@@ -117,7 +117,7 @@ app.get("/", (req, res) => {
   res.send(tokenList);
 });
 
-app.get("/all", (req, res) => {
+app.get("/", (req, res) => {
   res.send(`
     <h1>Token List</h1>
     <table>
