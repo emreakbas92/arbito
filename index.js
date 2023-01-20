@@ -105,17 +105,7 @@ setInterval(() => {
 }});
 
 }, 30000);
-app.get("/all", (req, res) => {
-  let tokenList = []
-  tokens.forEach((token) => {
-    if (al < 0.99) {
-      tokenList.push({ symbol: token.symbol, value: al });
-    } else if (sat > 1.01) {
-      tokenList.push({ symbol: token.symbol, value: sat });
-    }
-  });
-  res.send(tokenList);
-});
+
 
 app.get("/", (req, res) => {
   res.send(`
