@@ -82,7 +82,7 @@ setInterval(() => {
                   }
 
                   // Check if the Huobi ask price is more than 102% of the BSC price
-              if (sat > 1.01) {
+                if (sat > 1.01) {
                 console.log(`${token.symbol}: ${sat}`);
               }
             });
