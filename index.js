@@ -108,9 +108,9 @@ setInterval(() => {
 app.get("/all", (req, res) => {
   let tokenList = []
   tokens.forEach((token) => {
-    if (al < 0.99) {
+    if (token.al < 0.99) {
       tokenList.push({ symbol: token.symbol, value: al });
-    } else if (sat > 1.01) {
+    } else if (token.sat > 1.01) {
       tokenList.push({ symbol: token.symbol, value: sat });
     }
   });
