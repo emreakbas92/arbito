@@ -124,6 +124,8 @@ app.get("/all", (req, res) => {
       <tr>
         <th>Symbol</th>
         <th>Contract Address</th>
+        <th>BSC/Huobi Bid Ratio</th>
+        <th>Huobi/BSC Ask Ratio</th>
       </tr>
       ${tokens.map(token => `
         <tr>
