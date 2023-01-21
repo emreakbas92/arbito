@@ -103,7 +103,7 @@ setInterval(() => {
                   });
                   res.on("end", () => {
                     const json = JSON.parse(data);
-                    let price = json.price;
+                    let price = json.data.price;
                     // Calculate the ratio of the Huobi ask price to the BSC price
                     token.al = bid /price;
                     token.sat = ask / price;
