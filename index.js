@@ -53,7 +53,18 @@ const tokens = [
   { symbol: "mcrtusdt", contract: "0x4b8285aB433D8f69CB48d5Ad62b415ed1a221e4f-bsc" },
   { symbol: "inrusdt", contract: "0xaB725d0A10C3f24725c89F5765Ae5794a26C1336-bsc" },
   { symbol: "ntusdt", contract: "0xfbcf80ed90856AF0d6d9655F746331763EfDb22c-bsc" },
-  { symbol: "xcurusdt", contract: "0xd52669712f253CD6b2Fe8A8638F66ed726cb770C-bsc" },
+  { symbol: "slcusdt", contract: "SLC" },
+  { symbol: "diousdt", contract: "DIO" },
+  { symbol: "zbcusdt", contract: "ZBC" },
+  { symbol: "gmtusdt", contract: "GMT" },
+  { symbol: "auryusdt", contract: "AURY" },
+  { symbol: "gstusdt", contract: "GST" },
+  { symbol: "mplxusdt", contract: "MPLX" },
+  { symbol: "hbbusdt", contract: "HBB" },
+  { symbol: "saousdt", contract: "SAO" },
+  { symbol: "eluusdt", contract: "ELU" },
+  { symbol: "likeusdt", contract: "LIKE" },
+  { symbol: "snsusdt", contract: "SNS" },
   { symbol: "rocousdt", contract: "0xb2a85C5ECea99187A977aC34303b80AcbDdFa208-avalanche" }
 ];
 
@@ -90,6 +101,22 @@ setInterval(() => {
 
               // Calculate the ratio of the Huobi ask price to the BSC price
               token.sat = price / ask;
+               // Get the price of the token on the BSC network from Dex.guru
+            https
+            .get(`https://price.jup.ag/v1/price?id=${token.contract}`, (res) => {
+              let data = "";
+              res.on("data", (chunk) => {
+                data += chunk;
+              });
+              res.on("end", () => {
+                const json = JSON.parse(data);
+                const price = json.priceUSD;
+  
+                // Calculate the ratio of the BSC price to the Huobi bid price
+                token.al = price / bid;
+  
+                // Calculate the ratio of the Huobi ask price to the BSC price
+                token.sat = price / ask;
             });
           })
           .on("error", (err) => {
