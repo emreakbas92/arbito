@@ -103,7 +103,7 @@ setInterval(() => {
                 token.sat = price / ask;
                  // Get the price of the token on the BSC network from Dex.guru
               https
-              .get(`https://price.jup.ag/v1/price?id=${token.contract}`, (res) => {
+                .get(`https://price.jup.ag/v1/price?id=${token.contract}`, (res) => {
                 let data = "";
                 res.on("data", (chunk) => {
                   data += chunk;
