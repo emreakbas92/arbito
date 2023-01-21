@@ -87,23 +87,7 @@ setInterval(() => {
 
             // Get the price of the token on the BSC network from Dex.guru
             https
-          .get(`https://api.dex.guru/v1/tokens/${token.contract}`, (res) => {
-            let data = "";
-            res.on("data", (chunk) => {
-              data += chunk;
-            });
-            res.on("end", () => {
-              const json = JSON.parse(data);
-              const price = json.priceUSD;
-
-              // Calculate the ratio of the BSC price to the Huobi bid price
-              token.al = price / bid;
-
-              // Calculate the ratio of the Huobi ask price to the BSC price
-              token.sat = price / ask;
-               // Get the price of the token on the BSC network from Dex.guru
-            https
-            .get(`https://price.jup.ag/v1/price?id=${token.contract}`, (res) => {
+            .get(`https://api.dex.guru/v1/tokens/${token.contract}`, (res) => {
               let data = "";
               res.on("data", (chunk) => {
                 data += chunk;
@@ -111,12 +95,29 @@ setInterval(() => {
               res.on("end", () => {
                 const json = JSON.parse(data);
                 const price = json.priceUSD;
-  
+      
                 // Calculate the ratio of the BSC price to the Huobi bid price
                 token.al = price / bid;
-  
+      
                 // Calculate the ratio of the Huobi ask price to the BSC price
                 token.sat = price / ask;
+                 // Get the price of the token on the BSC network from Dex.guru
+              https
+              .get(`https://price.jup.ag/v1/price?id=${token.contract}`, (res) => {
+                let data = "";
+                res.on("data", (chunk) => {
+                  data += chunk;
+                });
+                res.on("end", () => {
+                  const json = JSON.parse(data);
+                  const price = json.priceUSD;
+      
+                  // Calculate the ratio of the BSC price to the Huobi bid price
+                  token.al = price / bid;
+      
+  
+                // Calculate the ratio of the Huobi ask price to the BSC price
+                  token.sat = price / ask;
             });
           })
           .on("error", (err) => {
