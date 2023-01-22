@@ -86,27 +86,29 @@ setInterval(() => {
             const bid = json.tick.bid[0];
 
             // Get the price of the token on the BSC network from Dex.guru
-            https
-            .get(`https://api.dex.guru/v1/tokens/${token.contract}`, (res) => {
+        https
+        .get(`https://api.dex.guru/v1/tokens/${token.contract}`, (res) => {
+          let data = "";
+          res.on("data", (chunk) => {
+            data += chunk;
+          });
+          res.on("end", () => {
+            const json = JSON.parse(data);
+            let price = json.priceUSD;
+            // Get the price of the token on the BSC network from Jup.ag
+            https.get(`https://price.jup.ag/v1/price?id=${token.contract}`, (res) => {
               let data = "";
               res.on("data", (chunk) => {
                 data += chunk;
               });
               res.on("end", () => {
                 const json = JSON.parse(data);
-                let price = json.priceUSD;
-                // Get the price of the token on the BSC network from Jup.ag
-                https.get(`https://price.jup.ag/v1/price?id=${token.contract}`, (res) => {
-                  let data = "";
-                  res.on("data", (chunk) => {
-                    data += chunk;
-                  });
-                  res.on("end", () => {
-                    const json = JSON.parse(data);
-                    let price = json.data.price;
-                    // Calculate the ratio of the Huobi ask price to the BSC price
-                    token.al = bid /price;
-                    token.sat = ask / price;
+                let jupPrice = json.data.price;
+                // Calculate the ratio of the Huobi ask price to the BSC price
+                token.al_dex = price / bid;
+                token.al_jup = jupPrice / bid;
+                token.sat_dex = price / ask;
+                token.sat_jup = jupPrice / ask;
               });
             })
             .on("error", (err) => {
@@ -136,6 +138,8 @@ app.get("/", (req, res) => {
         <th>Contract Address</th>
         <th>BSC/Huobi Bid Ratio</th>
         <th>Huobi/BSC Ask Ratio</th>
+        <th>Jup/Huobi Ask Ratio</th>
+        <th>Huobi/Jup Ask Ratio</th>
       </tr>
       ${tokens.map(token => {
         if (token.al < 0.99 || token.sat > 1.01) {
@@ -143,8 +147,10 @@ app.get("/", (req, res) => {
             <tr>
               <td>${token.symbol}</td>
               <td>${token.contract}</td>
-              <td>${token.al}</td>
-              <td>${token.sat}</td>
+              <td>${token.al_dex}</td>
+              <td>${token.sat_dex}</td>
+              <td>${token.al_jup}</td>
+              <td>${token.sat_jup}</td>
             </tr>
           `;
         }
@@ -159,3 +165,4 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
