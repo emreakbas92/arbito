@@ -108,16 +108,14 @@ setInterval(() => {
                       token.al_dex = price / bid;
                       token.al_jup = jupPrice / bid;
                       token.sat_dex = price / ask;
-                  token.sat_jup = jupPrice / ask;
-                });
-              })
-              .on("error", (err) => {
-                console.log("Error: " + err.message);
-              });
-            });
-          })
-          .on("error", (err) => {
-            console.log("Error: " + err.message);
+                      token.sat_jup = jupPrice / ask;
+                      console.log(token);
+                    });
+                  });
+               });
+             })
+            .on("error", (err) => {
+             console.log("Error: " + err.message);
           });
       });
     })
@@ -128,8 +126,9 @@ setInterval(() => {
   console.log("Error: " + err.message);
 }
 });
-
 }, 30000);
+
+
 app.get("/", (req, res) => {
   res.send(`
     <h1>Token List</h1>
