@@ -117,14 +117,14 @@ setInterval(() => {
             .on("error", (err) => {
              console.log("Error: " + err.message);
           });
-      });
-    })
-    .on("error", (err) => {
-      console.log("Error: " + err.message);
-    });
-} catch (err) {
-  console.log("Error: " + err.message);
-}
+        });
+      })
+     .on("error", (err) => {
+       console.log("Error: " + err.message);
+     });
+  } catch (err) {
+    console.log("Error: " + err.message);
+  }
 });
 }, 30000);
 
