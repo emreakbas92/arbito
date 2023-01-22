@@ -86,39 +86,39 @@ setInterval(() => {
             const bid = json.tick.bid[0];
 
             // Get the price of the token on the BSC network from Dex.guru
-        https
-        .get(`https://api.dex.guru/v1/tokens/${token.contract}`, (res) => {
-          let data = "";
-          res.on("data", (chunk) => {
-            data += chunk;
-          });
-          res.on("end", () => {
-            const json = JSON.parse(data);
-            let price = json.priceUSD;
-            // Get the price of the token on the BSC network from Jup.ag
-            https.get(`https://price.jup.ag/v1/price?id=${token.contract}`, (res) => {
-              let data = "";
-              res.on("data", (chunk) => {
-                data += chunk;
+            https
+              .get(`https://api.dex.guru/v1/tokens/${token.contract}`, (res) => {
+                let data = "";
+                res.on("data", (chunk) => {
+                  data += chunk;
+                });
+                res.on("end", () => {
+                  const json = JSON.parse(data);
+                  let price = json.priceUSD;
+                  // Get the price of the token on the BSC network from Jup.ag
+                  https.get(`https://price.jup.ag/v1/price?id=${token.contract}`, (res) => {
+                    let data = "";
+                    res.on("data", (chunk) => {
+                      data += chunk;
+                    });
+                    res.on("end", () => {
+                      const json = JSON.parse(data);
+                      let jupPrice = json.data.price;
+                      // Calculate the ratio of the Huobi ask price to the BSC price
+                      token.al_dex = price / bid;
+                      token.al_jup = jupPrice / bid;
+                      token.sat_dex = price / ask;
+                  token.sat_jup = jupPrice / ask;
+                });
+              })
+              .on("error", (err) => {
+                console.log("Error: " + err.message);
               });
-              res.on("end", () => {
-                const json = JSON.parse(data);
-                let jupPrice = json.data.price;
-                // Calculate the ratio of the Huobi ask price to the BSC price
-                token.al_dex = price / bid;
-                token.al_jup = jupPrice / bid;
-                token.sat_dex = price / ask;
-                token.sat_jup = jupPrice / ask;
-              });
-            })
-            .on("error", (err) => {
-              console.log("Error: " + err.message);
             });
+          })
+          .on("error", (err) => {
+            console.log("Error: " + err.message);
           });
-        })
-        .on("error", (err) => {
-          console.log("Error: " + err.message);
-        });
       });
     })
     .on("error", (err) => {
@@ -126,7 +126,8 @@ setInterval(() => {
     });
 } catch (err) {
   console.log("Error: " + err.message);
-}});
+}
+});
 
 }, 30000);
 app.get("/", (req, res) => {
