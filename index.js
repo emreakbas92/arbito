@@ -23,8 +23,8 @@ setInterval(() => {
       res.on("end", () => {
         const json = JSON.parse(data);
         if(!json.result || !json.result.bestAskprice || !json.result.bestBidprice) return;
-        let bybit_ask = parseFloat(json.result.bestAskprice);
-        let bybit_bid = parseFloat(json.result.bestBidprice);
+        const bybit_ask = json.result.bestAskprice;
+        const bybit_bid = json.result.bestBidprice;
         console.log(token.symbol + ": best ask price: " + bybit_ask + ", best bid price: " + bybit_bid);
       });
     });
