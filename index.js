@@ -28,9 +28,6 @@ setInterval(() => {
         console.log(token.symbol + ": best ask price: " + bybit_ask + ", best bid price: " + bybit_bid);
       });
     });
-    } catch (err) {
-     console.log("Error: " + err.message);
-    }
   });
 }, 30000);
 
