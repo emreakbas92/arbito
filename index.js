@@ -129,6 +129,14 @@ setInterval(() => {
                       const json = JSON.parse(data);
                       let jupPrice = json.data.price;
                       if (isNaN(jupPrice)) return;
+                      token.al_bybit = price / bybit_bid;
+                      token.sat_bybit = price / byit_ask;
+                      token.al_jupbybit = jupPrice / bybit_bid;
+                      token.sat_jupbybit = jupPrice / bybit_ask;
+                      token.al_dex = price / bid;
+                      token.al_jup = jupPrice / bid;
+                      token.sat_dex = price / ask;
+                      token.sat_jup = jupPrice / ask;
                     });
                   });
                 });
