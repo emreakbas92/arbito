@@ -149,7 +149,7 @@ setInterval(() => {
       console.log(err);
     }
   });
-}, 3000);
+}, 30000);
 
 
 app.get("/", (req, res) => {
