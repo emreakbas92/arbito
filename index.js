@@ -118,6 +118,7 @@ setInterval(() => {
                 res.on("end", () => {
                   const json = JSON.parse(data);
                   let price = json.priceUSD;
+                  if (isNaN(price)) return;
                   // Get the price of the token on the BSC network from Jup.ag
                   https.get(`https://price.jup.ag/v1/price?id=${token.contract}`, (res) => {
                     let data = "";
@@ -127,6 +128,7 @@ setInterval(() => {
                     res.on("end", () => {
                       const json = JSON.parse(data);
                       let jupPrice = json.data.price;
+                      if (isNaN(jupPrice)) return;
                     });
                   });
                 });
