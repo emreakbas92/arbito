@@ -9,9 +9,7 @@ const tokens = [
   { symbol: "BONKUSDT", contract: "BONK" },
   { symbol: "MPLXUSDT", contract: "MPLX" },
   { symbol: "KASTAUSDT", contract: "0x235737dbb56e8517391473f7c964db31fa6ef280-polygon" },
-  { symbol: "KASTAUSDT", contract: "0x235737dbb56e8517391473f7c964db31fa6ef280-polygon" },
-  { symbol: "rocousdt", contract: "0xb2a85C5ECea99187A977aC34303b80AcbDdFa208-avalanche" },
-  { symbol: "rocousdt", contract: "0xb2a85C5ECea99187A977aC34303b80AcbDdFa208-avalanche" }
+  { symbol: "KASTAUSDT", contract: "0x235737dbb56e8517391473f7c964db31fa6ef280-polygon" }
 ];
 setInterval(() => {
   tokens.forEach((token) => {
