@@ -149,7 +149,7 @@ setInterval(() => {
       console.log(err);
     }
   });
-}, 1000);
+}, 3000);
 
 
 app.get("/", (req, res) => {
@@ -169,7 +169,7 @@ app.get("/", (req, res) => {
         <th>Bybit/Jup Ask Ratio</th>
       </tr>
       ${tokens.map(token => {
-        if (token.al_dex < 0.98 || token.sat_dex > 1.02 || token.sat_jup > 1.01 || token.al_jup < 0.99 || token.al_bybit < 0.98 || token.sat_bybit > 1.02 || token.sat_jupbybit > 1.01 || token.al_jupbybit < 0.99) {
+        if (token.al_dex < 0.98 || token.sat_dex > 1.02 || token.sat_jup > 1.01 || token.al_jup < 0.99 || token.al_bybit < 0.98 || token.sat_bybit > 1.02 || token.sat_jupbybit > 1.01 || token.al_jupbybit < 0.99 ) {
           return `
           <tr>
             <td>${token.symbol}</td>
