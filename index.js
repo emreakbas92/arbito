@@ -115,12 +115,14 @@ setInterval(() => {
                             const json = JSON.parse(data);
                             const bybitAsk = json.result[0].ask_price;
                             const bybitBid = json.result[0].bid_price;
+                            token.al_bybit = price / bybit_bid;
+                            token.sat_bybit = price / byit_ask;
+                            token.al_jupbybit = jupPrice / bybit_bid;
+                            token.sat_jupbybit = jupPrice / bybit_ask;
                             token.al_dex = price / bid;
                             token.al_jup = jupPrice / bid;
                             token.sat_dex = price / ask;
                             token.sat_jup = jupPrice / ask;
-                            token.al_bybit = bybitAsk / ask;
-                            token.sat_bybit = bybitBid / bid;
                             console.log(token);
                           } catch (err) {
                             console.log("Error: " + err.message);
@@ -159,23 +161,31 @@ app.get("/", (req, res) => {
     <h1>Token List</h1>
     <table>
       <tr>
-        <th>Symbol</th>
-        <th>Contract Address</th>
-        <th>BSC/Huobi Bid Ratio</th>
-        <th>Huobi/BSC Ask Ratio</th>
-        <th>Jup/Huobi Ask Ratio</th>
-        <th>Huobi/Jup Ask Ratio</th>
+      <th>Symbol</th>
+      <th>Contract Address</th>
+      <th>BSC/Huobi Bid Ratio</th>
+      <th>Huobi/BSC Ask Ratio</th>
+      <th>Jup/Huobi Ask Ratio</th>
+      <th>Huobi/Jup Ask Ratio</th>
+      <th>BSC/Bybit Bid Ratio</th>
+      <th>Bybit/BSC Ask Ratio</th>
+      <th>Jup/Bybit Bid Ratio</th>
+      <th>Bybit/Jup Ask Ratio</th>
       </tr>
       ${tokens.map(token => {
-        if (token.al_dex < 0.98 || token.sat_dex > 1.02 || token.sat_jup > 1.01 || token.al_jup < 0.99) {
+        if (token.al_dex < 0.98 || token.sat_dex > 1.02 || token.sat_jup > 1.01 || token.al_jup < 0.99 || token.al_bybit < 0.98 || token.sat_bybit > 1.02 || token.sat_jupbybit > 1.01 || token.al_jupbybit < 0.99 ) {
           return `
             <tr>
-              <td>${token.symbol}</td>
-              <td>${token.contract}</td>
-              <td>${token.al_dex < 0.98 ? token.al_dex : ''}</td>
-              <td>${token.sat_dex > 1.02 ? token.sat_dex : ''}</td>
-              <td>${token.al_jup < 0.99 ? token.al_jup : ''}</td>
-              <td>${token.sat_jup > 1.01 ? token.sat_jup : ''}</td>
+            <td>${token.symbol}</td>
+            <td>${token.contract}</td>
+            <td>${token.al_dex < 0.98 ? token.al_dex : ''}</td>
+            <td>${token.sat_dex > 1.02 ? token.sat_dex : ''}</td>
+            <td>${token.al_jup < 0.99 ? token.al_jup : ''}</td>
+            <td>${token.sat_jup > 1.01 ? token.sat_jup : ''}</td>
+            <td>${token.al_bybit < 0.98 ? token.al_bybit : ''}</td>
+            <td>${token.sat_bybit > 1.02 ? token.sat_bybit : ''}</td>
+            <td>${token.al_jupbybit < 0.99 ? token.al_jupbybit : ''}</td>
+            <td>${token.sat_jupbybit > 1.01 ? token.sat_jupbybit : ''}</td>
             </tr>
           `;
         }
