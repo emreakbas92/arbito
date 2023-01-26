@@ -165,7 +165,7 @@ setInterval(() => {
     });
   }).on("error", (err) => {
     console.log("Error: " + err.message);
-});
+  });
 });
 }, 30000);
 
