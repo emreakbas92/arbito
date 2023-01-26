@@ -105,7 +105,7 @@ setInterval(() => {
                       const json = JSON.parse(data);
                       let jupPrice = json.data.price;
                       // Get the ask and bid prices for the token from Bybit
-                      https.get(`https://api.bybit.com/v2/public/tickers?symbol=${token.bybit_symbol}`, (res) => {
+                      https.get(`https://api.bybit.com/spot/quote/v1/ticker/24hr?symbol=${token.symbol}`, (res) => {
                         let data = "";
                         res.on("data", (chunk) => {
                           data += chunk;
@@ -113,10 +113,10 @@ setInterval(() => {
                         res.on("end", () => {
                           try {
                             const json = JSON.parse(data);
-                            const bybitAsk = json.result[0].ask_price;
-                            const bybitBid = json.result[0].bid_price;
-                            token.al_bybit = price / bybit_bid;
-                            token.sat_bybit = price / byit_ask;
+                            const bybitAsk = json.result[0].bestAskprice;
+                            const bybitBid = json.result[0].bestBidprice;
+                            token.al_bybit = price / bybitBid;
+                            token.sat_bybit = price / bybitAsk;
                             token.al_jupbybit = jupPrice / bybit_bid;
                             token.sat_jupbybit = jupPrice / bybit_ask;
                             token.al_dex = price / bid;
