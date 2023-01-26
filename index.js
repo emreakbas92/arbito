@@ -82,93 +82,82 @@ const tokens = [
   { symbol: "rocousdt", contract: "0xb2a85C5ECea99187A977aC34303b80AcbDdFa208-avalanche" }
 ];
 
-let al, sat;
-setInterval(() => {
-  tokens.forEach((token) => {
+tokens.forEach(async (token) => {
+  try {
     // Get the ask and bid prices for the token from Huobi
-    https.get(`https://api.huobi.pro/market/detail/merged?symbol=${token.symbol}`, (res) => {
-      let data = "";
-      res.on("data", (chunk) => {
-        data += chunk;
-      });
-      res.on("end", () => {
-        try {
-          const json = JSON.parse(data);
-          if(!json.tick || !json.tick.ask[0] || !json.tick.bid[0]) return;
-          const ask = json.tick.ask[0];
-          const bid = json.tick.bid[0];
+    const huobiRes = await https.get(`https://api.huobi.pro/market/detail/merged?symbol=${token.symbol}`);
+    const huobiData = await huobiRes.json();
+    if(!huobiData.tick || !huobiData.tick.ask[0] || !huobiData.tick.bid[0]) return;
+    const ask = huobiData.tick.ask[0];
+    const bid = huobiData.tick.bid[0];
 
-          // Get the price of the token on the BSC network from Dex.guru
-          https.get(`https://api.dex.guru/v1/tokens/${token.contract}`, (res) => {
-            let data = "";
-            res.on("data", (chunk) => {
-              data += chunk;
-            });
-            res.on("end", () => {
-              try {
-                const json = JSON.parse(data);
-                let price = json.priceUSD;
-                // Get the price of the token on the BSC network from Jup.ag
-                https.get(`https://price.jup.ag/v1/price?id=${token.contract}`, (res) => {
-                  let data = "";
-                  res.on("data", (chunk) => {
-                    data += chunk;
-                  });
-                  res.on("end", () => {
-                    try {
-                      const json = JSON.parse(data);
-                      let jupPrice = json.data.price;
-                      // Get the ask and bid prices for the token from Bybit
-                      https.get(`https://api.bybit.com/spot/quote/v1/ticker/24hr?symbol=${token.symbol}`, (res) => {
-                        let data = "";
-                        res.on("data", (chunk) => {
-                          data += chunk;
-                        });
-                        res.on("end", () => {
-                          try {
-                            const json = JSON.parse(data);
-                            const bybitAsk = json.result[0].bestAskprice;
-                            const bybitBid = json.result[0].bestBidprice;
-                            token.al_bybit = price / bybitBid;
-                            token.sat_bybit = price / bybitAsk;
-                            token.al_jupbybit = jupPrice / bybitBid;
-                            token.sat_jupbybit = jupPrice / bybitAsk;
-                            token.al_dex = price / bid;
-                            token.al_jup = jupPrice / bid;
-                            token.sat_dex = price / ask;
-                            token.sat_jup = jupPrice / ask;
-                            console.log(token);
-                          } catch (err) {
-                            console.log("Error: " + err.message);
-                          }
-                        });
-                      }).on("error", (err) => {
-                        console.log("Error: " + err.message);  
-                      });                            
-                    } catch (err) {
-                      console.log("Error: " + err.message);
-                    }
-                  });
-                }).on("error", (err) => {
-                  console.log("Error: " + err.message);
-                });
-              } catch (err) {
-                console.log("Error: " + err.message);
-              }
-            });
-        }).on("error", (err) => {
-          console.log("Error: " + err.message);
-        });
-      } catch (err) {
-        console.log("Error: " + err.message);
-      }
-    });
-  }).on("error", (err) => {
+    // Get the price of the token on the BSC network from Dex.guru
+    const dexRes = await https.get(`https://api.dex.guru/v1/tokens/${token.contract}`);
+    const dexData = await dexRes.json();
+    let price = dexData.priceUSD;
+
+    // Get the price of the token on the BSC network from Jup.ag
+    const jupRes = await https.get(`https://price.jup.ag/v1/price?id=${token.contract}`);
+    const jupData = await jupRes.json();
+    let jupPrice = jupData.data.price;
+
+    // Get the ask and bid prices for the token from Bybit
+    const bybitRes = await https.get(`https://api.bybit.com/spot/quote/v1/ticker/24hr?symbol=${token.symbol}`);
+    const bybitData = await bybitRes.json();
+    const bybitAsk = bybitData.result[0].bestAskprice;
+    const bybitBid = bybitData.result[0].bestBidprice;
+    token.al_bybit = price / bybitBid;
+    token.sat_bybit = price / bybitAsk;
+    token.al_jupbybit = jupPrice / bybitBid;
+    token.sat_jupbybit = jupPrice / bybitAsk;
+    token.al_dex = price / bid;
+    token.al_jup = jupPrice / bid;
+    token.sat_dex = price / ask;
+    token.sat_jup = jupPrice / ask;
+    console.log(token);
+    } catch (err) {
     console.log("Error: " + err.message);
-  });
-});
-}, 30000);
+    }
+    });
+    
+    setInterval(() => {
+    tokens.forEach(async (token) => {
+    try {
+    // Get the ask and bid prices for the token from Huobi
+    const huobiRes = await https.get(https://api.huobi.pro/market/detail/merged?symbol=${token.symbol});
+    const huobiData = await huobiRes.json();
+    if(!huobiData.tick || !huobiData.tick.ask[0] || !huobiData.tick.bid[0]) return;
+    const ask = huobiData.tick.ask[0];
+    const bid = huobiData.tick.bid[0];
+ // Get the price of the token on the BSC network from Dex.guru
+ const dexRes = await https.get(`https://api.dex.guru/v1/tokens/${token.contract}`);
+ const dexData = await dexRes.json();
+ let price = dexData.priceUSD;
 
+ // Get the price of the token on the BSC network from Jup.ag
+ const jupRes = await https.get(`https://price.jup.ag/v1/price?id=${token.contract}`);
+ const jupData = await jupRes.json();
+ let jupPrice = jupData.data.price;
+
+ // Get the ask and bid prices for the token from Bybit
+ const bybitRes = await https.get(`https://api.bybit.com/spot/quote/v1/ticker/24hr?symbol=${token.symbol}`);
+ const bybitData = await bybitRes.json();
+ const bybitAsk = bybitData.result[0].bestAskprice;
+ const bybitBid = bybitData.result[0].bestBidprice;
+ token.al_bybit = price / bybitBid;
+ token.sat_bybit = price / bybitAsk;
+ token.al_jupbybit = jupPrice / bybitBid;
+ token.sat_jupbybit = jupPrice / bybitAsk;
+ token.al_dex = price / bid;
+ token.al_jup = jupPrice / bid;
+ token.sat_dex = price / ask;
+ token.sat_jup = jupPrice / ask;
+ console.log(token);
+ } catch (err) {
+ console.log("Error: " + err.message);
+ }
+ });
+ }, 6000);
 
 app.get("/", (req, res) => {
   res.send(`
