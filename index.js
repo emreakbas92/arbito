@@ -129,33 +129,33 @@ tokens.forEach(async (token) => {
     if(!huobiData.tick || !huobiData.tick.ask[0] || !huobiData.tick.bid[0]) return;
     const ask = huobiData.tick.ask[0];
     const bid = huobiData.tick.bid[0];
- // Get the price of the token on the BSC network from Dex.guru
- const dexRes = await https.get(`https://api.dex.guru/v1/tokens/${token.contract}`);
- const dexData = await dexRes.json();
- let price = dexData.priceUSD;
+     // Get the price of the token on the BSC network from Dex.guru
+    const dexRes = await https.get(`https://api.dex.guru/v1/tokens/${token.contract}`);
+    const dexData = await dexRes.json();
+    let price = dexData.priceUSD;
 
- // Get the price of the token on the BSC network from Jup.ag
- const jupRes = await https.get(`https://price.jup.ag/v1/price?id=${token.contract}`);
- const jupData = await jupRes.json();
- let jupPrice = jupData.data.price;
+     // Get the price of the token on the BSC network from Jup.ag
+    const jupRes = await https.get(`https://price.jup.ag/v1/price?id=${token.contract}`);
+    const jupData = await jupRes.json();
+    let jupPrice = jupData.data.price;
 
- // Get the ask and bid prices for the token from Bybit
- const bybitRes = await https.get(`https://api.bybit.com/spot/quote/v1/ticker/24hr?symbol=${token.symbol}`);
- const bybitData = await bybitRes.json();
- const bybitAsk = bybitData.result[0].bestAskprice;
- const bybitBid = bybitData.result[0].bestBidprice;
- token.al_bybit = price / bybitBid;
- token.sat_bybit = price / bybitAsk;
- token.al_jupbybit = jupPrice / bybitBid;
- token.sat_jupbybit = jupPrice / bybitAsk;
- token.al_dex = price / bid;
- token.al_jup = jupPrice / bid;
- token.sat_dex = price / ask;
- token.sat_jup = jupPrice / ask;
- console.log(token);
- } catch (err) {
- console.log("Error: " + err.message);
- }
+    // Get the ask and bid prices for the token from Bybit
+    const bybitRes = await https.get(`https://api.bybit.com/spot/quote/v1/ticker/24hr?symbol=${token.symbol}`);
+     const bybitData = await bybitRes.json();
+     const bybitAsk = bybitData.result[0].bestAskprice;
+    const bybitBid = bybitData.result[0].bestBidprice;
+    token.al_bybit = price / bybitBid;
+    token.sat_bybit = price / bybitAsk;
+    token.al_jupbybit = jupPrice / bybitBid;
+    token.sat_jupbybit = jupPrice / bybitAsk;
+    token.al_dex = price / bid;
+    token.al_jup = jupPrice / bid;
+    token.sat_dex = price / ask;
+    token.sat_jup = jupPrice / ask;
+    console.log(token);
+    } catch (err) {
+    console.log("Error: " + err.message);
+  }
  });
  }, 6000);
 
