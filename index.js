@@ -1,4 +1,4 @@
-def first_code_block():
+def first_code_block(): {
 const express = require('express');
 const https = require('https');
 const app = express();
@@ -134,7 +134,7 @@ setInterval(() => {
 });
 });
 }, 30000);
-}}
+
 
 app.get("/", (req, res) => {
   res.send(`
@@ -172,8 +172,10 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+}
 
-def second_code_block():
+
+def second_code_block(): {
 const express = require('express');
 const https = require('https');
 const app = express();
@@ -327,3 +329,4 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+}
