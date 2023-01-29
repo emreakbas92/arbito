@@ -52,7 +52,7 @@ let al, sat;
 setInterval(() => {
   tokens.forEach((token) => {
     // Get the ask and bid prices for the token from Huobi
-    https.get(`https://https://api.bybit.com/spot/quote/v1/ticker/24hr?symbol=${token.symbol}`, (res) => {
+    https.get(`https://api.bybit.com/spot/quote/v1/ticker/24hr?symbol=${token.symbol}`, (res) => {
       let data = "";
       res.on("data", (chunk) => {
         data += chunk;
