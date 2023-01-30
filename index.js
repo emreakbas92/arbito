@@ -18,11 +18,21 @@ const tokens = [
   { symbol: "MNZUSDT", contract: "0x861f1E1397daD68289e8f6a09a2ebb567f1B895C-bsc" },
   { symbol: "HEROUSDT", contract: "0xD40bEDb44C081D2935eebA6eF5a3c8A31A1bBE13-bsc" },
   { symbol: "XWGUSDT", contract: "0x6b23C89196DeB721e6Fd9726E6C76E4810a464bc-bsc" },
+  { symbol: "MCRTUSDT", contract: "0x4b8285aB433D8f69CB48d5Ad62b415ed1a221e4f-bsc" },
+  { symbol: "CAPSUSDT", contract: "0xFfBa7529AC181c2Ee1844548e6D7061c9A597dF4-bsc" },
+  { symbol: "WWYUSDT", contract: "0x9Ab70e92319f0b9127df78868Fd3655fB9f1E322-bsc" },
   { symbol: "SONUSDT", contract: "0x3b0E967cE7712EC68131A809dB4f78ce9490e779-bsc" },
+  { symbol: "DRIVUSDT", contract: "0x461daB902f38210b42b7D8B4bfc71296E0629006-bsc" },
   { symbol: "STRMUSDT", contract: "0xC598275452fA319d75ee5f176FD3B8384925b425-bsc" },
   { symbol: "SLGUSDT", contract: "0x2348b010Fa9c0Ce30Bb042D54c298a3411361a01-bsc" },
+  { symbol: "STGUSDT", contract: "0xB0D502E938ed5f4df2E681fE6E419ff29631d62b-bsc" },
+  { symbol: "PRIMALUSDT", contract: "0xCb5327Ed4649548e0d73E70b633cdfd99aF6Da87-bsc" },
   { symbol: "LGXUSDT", contract: "0x9096B4309224d751FCB43d7eB178dcFFc122aD15-bsc" },
   { symbol: "LFWUSDT", contract: "0xD71239a33C8542Bd42130c1B4ACA0673B4e4f48B-bsc" },
+  { symbol: "COUSDT", contract: "0x936B6659Ad0C1b244Ba8Efe639092acae30dc8d6-bsc" },  
+  { symbol: "TIMEUSDT", contract: " 0x3b198e26E473b8faB2085b37978e36c9DE5D7f68-bsc" }, 
+  { symbol: "ORTUSDT", contract: " 0x9E711221B34A2d4B8F552BD5f4A6C4e7934920f7-bsc" }, 
+  { symbol: "QMALLUSDT", contract: "0x07e551E31A793E20dc18494ff6b03095A8F8Ee36-bsc" },
   { symbol: "AZYUSDT", contract: "0x7b665B2F633d9363b89A98b094B1F9E732Bd8F86-bsc" },
   { symbol: "DEFYUSDT", contract: "0xBF9f916bBda29A7F990F5F55c7607D94D7C3A60b-polygon" },
   { symbol: "COTUSDT", contract: "0x8d520c8E66091cfD6743fe37Fbe3A09505616C4b-polygon" },
@@ -151,3 +161,4 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
