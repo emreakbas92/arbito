@@ -22,7 +22,6 @@ const tokens = [
   { symbol: "CAPSUSDT", contract: "0xFfBa7529AC181c2Ee1844548e6D7061c9A597dF4-bsc" },
   { symbol: "WWYUSDT", contract: "0x9Ab70e92319f0b9127df78868Fd3655fB9f1E322-bsc" },
   { symbol: "SONUSDT", contract: "0x3b0E967cE7712EC68131A809dB4f78ce9490e779-bsc" },
-  { symbol: "DRIVUSDT", contract: "0x461daB902f38210b42b7D8B4bfc71296E0629006-bsc" },
   { symbol: "STRMUSDT", contract: "0xC598275452fA319d75ee5f176FD3B8384925b425-bsc" },
   { symbol: "SLGUSDT", contract: "0x2348b010Fa9c0Ce30Bb042D54c298a3411361a01-bsc" },
   { symbol: "STGUSDT", contract: "0xB0D502E938ed5f4df2E681fE6E419ff29631d62b-bsc" },
