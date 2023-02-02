@@ -142,10 +142,10 @@ app.get("/", (req, res) => {
             <tr>
               <td>${token.symbol}</td>
               <td>${token.contract}</td>
-              <td>${token.al_dex < 0.99 ? token.al_dex : ''}</td>
-              <td>${token.sat_dex > 1.00 ? token.sat_dex : ''}</td>
-              <td>${token.al_jup < 0.99 ? token.al_jup : ''}</td>
-              <td>${token.sat_jup > 1.00 ? token.sat_jup : ''}</td>
+              <td style="color:${token.al_dex < 0.95 ? 'green' : 'inherit'}">${token.al_dex < 0.98 ? token.al_dex : ''}</td>
+              <td style="color:${token.sat_dex > 1.05 ? 'red' : 'inherit'}">${token.sat_dex > 1.02 ? token.sat_dex : ''}</td>
+              <td style="color:${token.al_jup < 0.95 ? 'green' : 'inherit'}">${token.al_jup < 0.99 ? token.al_jup : ''}</td>
+              <td style="color:${token.sat_jup > 1.05 ? 'red' : 'inherit'}">${token.sat_jup > 1.01 ? token.sat_jup : ''}</td>
             </tr>
           `;
         }
