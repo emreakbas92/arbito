@@ -50,6 +50,7 @@ const tokens = [
   { symbol: "GMTUSDT", contract: "GMT" },
   { symbol: "FIDAUSDT", contract: "FIDA" },
   { symbol: "MBSUSDT", contract: "MBS" },
+  { symbol: "ACSUSDT", contract: "ACS" },
   { symbol: "1SOLUSDT", contract: "1SOL" },
   { symbol: "GSTUSDT", contract: "GST" },
   { symbol: "SHILLUSDT", contract: "SHILL" },
