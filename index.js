@@ -101,7 +101,7 @@ setInterval(() => {
                   res.on("end", () => {
                     try {
                       const json = JSON.parse(data);
-                      let jupPrice = json.data[token.contract].price
+                      let jupPrice = json.data[token.contract].price;
                       // Calculate the ratio of the Huobi ask price to the BSC price
                       token.al_dex = price / bid;
                       token.al_jup = jupPrice / bid;
