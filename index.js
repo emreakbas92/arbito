@@ -93,7 +93,7 @@ setInterval(() => {
                 const json = JSON.parse(data);
                 let price = json.priceUSD;
                 // Get the price of the token on the BSC network from Jup.ag
-                https.get(`https://price.jup.ag/v1/price?id=${token.contract}`, (res) => {
+                https.get(`https://price.jup.ag/v4/price?ids=${token.contract}`, (res) => {
                   let data = "";
                   res.on("data", (chunk) => {
                     data += chunk;
