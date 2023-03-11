@@ -93,7 +93,7 @@ setInterval(() => {
                 const dexData = JSON.parse(data);
                 const dexPrice = dexData.priceUSD;
                 // Get the price of the token on the BSC network from Jup.ag
-                https.get(`https://price.jup.ag/v4/price?ids=${token.contract}`, (res) => {
+                https.get(`https://price.jup.ag/v4/price?ids=${token.contract}&vsToken=USDT`, (res) => {
                   let data = "";
                   res.on("data", (chunk) => {
                     data += chunk;
