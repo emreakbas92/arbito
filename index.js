@@ -4,6 +4,7 @@ const app = express();
 const tokens = [
   { symbol: "KUNCIUSDT", contract: "0x6cf271270662be1C4fc1b7BB7D7D7Fc60Cc19125-bsc" },
   { symbol: "SFUNDUSDT", contract: "0x477bC8d23c634C154061869478bce96BE6045D12-bsc" },
+  { symbol: "GPTUSDT", contract: "0x153c0c947177e631e3dfc594ba28750d3a921fb5-bsc" },
   { symbol: "KMONUSDT", contract: "0xc732B6586A93b6B7CF5FeD3470808Bc74998224D-bsc" },
   { symbol: "ERTHAUSDT", contract: "0x62823659d09F9F9D2222058878f89437425eB261-bsc" },
   { symbol: "FAMEUSDT", contract: "0x28cE223853D123b52C74439B10b43366d73Fd3B5-bsc" },
